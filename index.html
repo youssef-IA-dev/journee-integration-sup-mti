@@ -158,49 +158,6 @@
             border: 3px solid #007bff; /* Bordure bleue pour un effet professionnel */
         }
 
-        /* Galerie des Moments */
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-        .gallery img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        .gallery img:hover {
-            transform: scale(1.05);
-        }
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 10px;
-        }
-        .lightbox .close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: white;
-            font-size: 2em;
-            cursor: pointer;
-        }
-
         /* Créateur */
         .creator {
             text-align: center;
@@ -258,7 +215,6 @@
             <ul>
                 <li><a href="#programme">Programme</a></li>
                 <li><a href="#dates-lieux">Dates & Lieux</a></li>
-                <li><a href="#gallery">Galerie</a></li>
                 <li><a href="#about">À propos de moi</a></li>
                 <li><a href="#creator">Créateur</a></li>
             </ul>
@@ -321,23 +277,6 @@
         </div>
     </section>
 
-    <section id="gallery">
-        <div class="container">
-            <h2>Galerie des Moments</h2>
-            <p>Découvrez des instants capturés lors des journées d'intégration précédentes ! Cliquez sur une image pour l'agrandir.</p>
-            <div class="gallery">
-                <img src="https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/photo1.jpg" alt="Moment 1" onclick="openLightbox(this.src)">
-                <img src="https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/photo2.jpg" alt="Moment 2" onclick="openLightbox(this.src)">
-                <img src="https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/photo3.jpg" alt="Moment 3" onclick="openLightbox(this.src)">
-                <img src="https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/photo4.jpg" alt="Moment 4" onclick="openLightbox(this.src)">
-            </div>
-            <div id="lightbox" class="lightbox">
-                <span class="close" onclick="closeLightbox()">&times;</span>
-                <img id="lightbox-img" src="" alt="">
-            </div>
-        </div>
-    </section>
-
     <section id="about">
         <div class="container about">
             <h2>À propos de moi</h2>
@@ -381,15 +320,6 @@
         }
         setInterval(updateCountdown, 1000);
         updateCountdown();
-
-        // Fonctions pour la lightbox de la galerie
-        function openLightbox(src) {
-            document.getElementById('lightbox-img').src = src;
-            document.getElementById('lightbox').style.display = 'flex';
-        }
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-        }
     </script>
 </body>
 </html>
