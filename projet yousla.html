@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Journées d’Intégration SUP MTI Béni Mellal 2025</title>
+    <style>
+        /* Reset et styles de base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f4f4f4;
+            scroll-behavior: smooth;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        h1, h2, h3 {
+            color: #007bff; /* Bleu SUP MTI */
+        }
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+        a:hover {
+            color: #0056b3;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .logo {
+            width: 150px; /* Ajustez la taille selon l'image */
+            height: auto;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background-color: #007bff;
+            z-index: 100;
+            padding: 10px 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        nav li {
+            margin: 0 15px;
+        }
+        nav a {
+            color: white;
+            font-weight: bold;
+            padding: 10px;
+            transition: background-color 0.3s;
+        }
+        nav a:hover {
+            background-color: #0056b3;
+            border-radius: 5px;
+        }
+
+        /* Sections */
+        section {
+            padding: 60px 20px;
+            background-color: #fff;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Programme */
+        .activities {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .activity {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .activity:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .activity .icon {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+
+        /* Dates & Lieux */
+        .dates-lieux {
+            background-color: #e9ecef;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .dates-lieux ul {
+            list-style: none;
+            padding: 0;
+        }
+        .dates-lieux li {
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        /* À propos de moi */
+        .about {
+            text-align: center;
+        }
+        .avatar {
+            width: 150px;
+            height: auto;
+            border-radius: 50%; /* Pour un look circulaire */
+            margin: 0 auto 20px;
+            border: 3px solid #007bff; /* Bordure bleue pour un effet professionnel */
+        }
+
+        /* Créateur */
+        .creator {
+            text-align: center;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        /* Compteur */
+        .countdown {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.5em;
+            color: #007bff;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            nav li {
+                margin: 5px 0;
+            }
+            .activities {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="accueil">
+        <div class="container">
+            <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEVfyqgRCUR_w/company-logo_200_200/B4EZVrhnKuGYAI-/0/1741265728587?e=2147483647&v=beta&t=1SX7qMMHNiKPKxCOdpf5fCVw4ltKYvB6OnagR7E34TA alt="Logo SUP MTI" class="logo"> <!-- Remplacez par l'URL réelle de votre logo -->
+            <h1>🎉 Journées d’Intégration SUP MTI Béni Mellal 2025 🎉</h1>
+            <p>Découvrez, partagez et vivez l’expérience SUP MTI Béni Mellal !</p>
+            <div class="countdown" id="countdown">Temps restant jusqu'au 5 décembre 2025</div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#programme">Programme</a></li>
+                <li><a href="#dates-lieux">Dates & Lieux</a></li>
+                <li><a href="#about">À propos de moi</a></li>
+                <li><a href="#creator">Créateur</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section id="programme">
+        <div class="container">
+            <h2>Programme des activités</h2>
+            <div class="activities">
+                <div class="activity">
+                    <div class="icon">🤝</div>
+                    <h3>Jeux d’équipe</h3>
+                    <p>Renforcez la coopération et les liens entre étudiants.</p>
+                </div>
+                <div class="activity">
+                    <div class="icon">🎤</div>
+                    <h3>Talent Show</h3>
+                    <p>Exprimez vos talents et découvrez ceux de vos camarades.</p>
+                </div>
+                <div class="activity">
+                    <div class="icon">⚽</div>
+                    <h3>Tournois sportifs</h3>
+                    <p>Vivez des moments de compétition dans une ambiance chaleureuse.</p>
+                </div>
+                <div class="activity">
+                    <div class="icon">🏛️</div>
+                    <h3>Visite guidée</h3>
+                    <p>Découvrez les lieux emblématiques de Béni Mellal et explorez le campus.</p>
+                </div>
+                <div class="activity">
+                    <div class="icon">🎨</div>
+                    <h3>Animations interactives</h3>
+                    <p>Participez à des activités ludiques et créatives.</p>
+                </div>
+                <div class="activity">
+                    <div class="icon">🏍️</div>
+                    <h3>Parcours Quad</h3>
+                    <p>Expérience originale et divertissante pour tous les participants (100 DHS).</p>
+                </div>
+                <div class="activity">
+                    <div class="icon">🎥</div>
+                    <h3>Soirée cinéma</h3>
+                    <p>Terminez ces journées par un moment de détente et de convivialité.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="dates-lieux">
+        <div class="container">
+            <h2>Dates & Lieux</h2>
+            <div class="dates-lieux">
+                <ul>
+                    <li>5 décembre 2025 : Journée sportive au Club Omnisports de Béni Mellal</li>
+                    <li>6 décembre 2025 : Journée d’intégration à la Maison de la Culture</li>
+                </ul>
+                <p>Pour réserver vos places, contactez directement SUP MTI Béni Mellal.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container about">
+            <h2>À propos de moi</h2>
+            <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fyoussef-ia-dev.github.io%2FYOUSSEF-LACHHAB%2F&psig=AOvVaw3LGoFlkdXdnxtiHVnVS1rq&ust=1763916574579000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCNCYxLibhpEDFQAAAAAdAAAAABAE" alt="Photo de Youssef Lachhab" class="avatar"> <!-- Remplacez par l'URL réelle de votre photo -->
+            <p>Je suis Youssef Lachhab, étudiant en 2ᵉ année à SUP MTI. Passionné par le développement web et les projets créatifs, j’ai conçu ce site pour mettre en valeur la Journée d’Intégration et mes compétences.</p>
+            <a href="https://www.linkedin.com/in/youssef-lachhab-?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><button>Voir mon LinkedIn</button></a>
+        </div>
+    </section>
+
+    <section id="creator">
+        <div class="container creator">
+            <h2>Créateur du site</h2>
+            <p>Ce site a été conçu et développé par Youssef Lachhab, étudiant en 2ème année à SUP MTI, pour présenter la Journée d’Intégration SUP MTI Béni Mellal.</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>Contacts de l’école : SUP MTI Béni Mellal</p>
+            <p>Email pour questions : contact@supmti.ma</p>
+            <p>&copy; 2025 SUP MTI Béni Mellal. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Compteur jusqu'au 5 décembre 2025
+        function updateCountdown() {
+            const targetDate = new Date('2025-12-05T00:00:00');
+            const now = new Date();
+            const diff = targetDate - now;
+
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                document.getElementById('countdown').innerHTML = `Temps restant : ${days} jours, ${hours} heures, ${minutes} minutes, ${seconds} secondes`;
+            } else {
+                document.getElementById('countdown').innerHTML = 'L\'événement a commencé !';
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+    </script>
+</body>
+</html>
