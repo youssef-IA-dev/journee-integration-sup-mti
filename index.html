@@ -22,10 +22,32 @@
 
     /* Navigation */
     nav { position:sticky; top:0; background:#0056b3; z-index:100; box-shadow:0 2px 5px rgba(0,0,0,0.2); }
-    nav ul { list-style:none; display:flex; justify-content:center; flex-wrap:wrap; }
+    nav .container {
+        display: flex;
+        justify-content: center; /* Centré par défaut sur desktop */
+        align-items: center;
+    }
+    nav ul { 
+        list-style:none; 
+        display:flex; 
+        justify-content:center; 
+        flex-wrap:wrap; 
+        transition: height 0.3s ease-in-out;
+    }
     nav li { margin:0 15px; }
     nav a { color:white; font-weight:bold; padding:15px 10px; display:inline-block; text-decoration:none; transition:0.3s; }
     nav a:hover { background:#003d82; border-radius:4px; }
+    
+    /* Bouton Menu (caché par défaut sur desktop) */
+    .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        padding: 10px 15px;
+        cursor: pointer;
+    }
 
     /* Sections */
     section { padding:60px 20px; background:white; margin:20px 0; border-radius:12px; box-shadow:0 5px 15px rgba(0,0,0,0.05); }
@@ -53,12 +75,12 @@
     .inscription input, .inscription button { margin-bottom:15px; padding:12px; border:1px solid #ccc; border-radius:6px; font-size:1em; }
     .inscription button { background:#0056b3; color:white; font-weight:bold; cursor:pointer; transition:0.3s; }
     .inscription button:hover { background:#003d82; }
-
     .inscriptions-list { margin-top:20px; display:none; max-width:600px; margin-left:auto; margin-right:auto; }
     .inscriptions-list li { background:#f9f9f9; padding:12px; margin-bottom:6px; border-radius:6px; }
 
     /* Contact */
     .contact { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    .social, .whatsapp { text-align: center; } 
     .social a, .whatsapp a { display:inline-block; margin:10px 5px; padding:12px 20px; border-radius:8px; color:white; font-weight:bold; text-decoration:none; transition:0.3s; }
     .social a { background:#0056b3; }
     .social a:hover { background:#003d82; }
@@ -68,19 +90,106 @@
     /* Footer */
     footer { background:#0056b3; color:white; text-align:center; padding:25px; border-radius:12px; }
 
-    @media(max-width:768px){
-    header {
-        padding: 30px 15px;       /* moins de padding pour le header */
-    }
-    header h1 {
-        font-size: 1.8em;         /* texte plus petit pour s’adapter */
-    }
-    header p {
+    /* === RESPONSIVE DESIGN (Max 768px pour Tablettes et Mobiles) === */
+    @media(max-width:768px) {
+        /* Conteneur et Sections */
+        .container {
+            padding: 0 10px;
+        }
+        section {
+            padding: 40px 15px;
+            margin: 15px 0;
+        }
 
+        /* Header */
+        header {
+            padding: 40px 15px;
+        }
+        header h1 {
+            font-size: 2em;
+        }
+        header p {
+            font-size: 1em;
+        }
+        .countdown {
+            font-size: 1.1em;
+            padding: 8px 15px;
+        }
+
+        /* Titres de Sections */
+        section h2 {
+            font-size: 1.6em;
+            margin-bottom: 20px;
+        }
+
+        /* NAVIGATION MOBILE */
+        nav .container {
+            justify-content: flex-start; /* Aligner le bouton menu à gauche */
+        }
+        .menu-toggle {
+            display: block; /* Afficher le bouton menu */
+            order: 1; /* Le mettre en premier si on veut */
+        }
+        nav ul {
+            display: none; /* Cacher le menu par défaut */
+            flex-direction: column; 
+            align-items: flex-start; /* Aligner les liens à gauche */
+            width: 100%;
+            padding-top: 5px; /* Petit espace au-dessus */
+            order: 2; /* Le mettre sous le bouton */
+        }
+        /* Règle pour afficher le menu */
+        nav ul.nav-open {
+            display: flex;
+        }
+        nav li {
+            margin: 0;
+            width: 100%; /* Les liens prennent toute la largeur */
+        }
+        nav a {
+            padding: 10px 15px;
+            width: 100%;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        nav li:last-child a {
+            border-bottom: none;
+        }
+
+
+        /* Activités et Avantages */
+        .activities, .advantages {
+            gap: 15px;
+        }
+
+        /* Contact */
+        .contact {
+            grid-template-columns: 1fr;
+            gap: 30px;
+            text-align: center;
+        }
+        .social a, .whatsapp a {
+            margin: 8px;
+            display: block; 
+            width: 80%; 
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Dates & Lieux - Galerie */
+        .gallery {
+            grid-template-columns: 1fr;
+        }
+
+        /* Footer */
+        footer {
+            padding: 20px 10px;
+        }
+    }
 </style>
 </head>
 <body>
-
 <header id="accueil">
     <div class="container">
         <img src="https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/sup%20mti.jpg" alt="Logo SUPMTI" class="logo">
@@ -92,13 +201,18 @@
 
 <nav>
     <div class="container">
-        <ul>
-            <li><a href="#accueil">Accueil</a></li>
-            <li><a href="#programme">Programme</a></li>
-            <li><a href="#avantages">Avantages</a></li>
-            <li><a href="#dates-lieux">Dates & Lieux</a></li>
-            <li><a href="#inscription">Inscription Quad</a></li>
-            <li><a href="#contact">Contact</a></li>
+        <!-- Bouton pour ouvrir/fermer le menu (affiché uniquement sur mobile) -->
+        <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav-links" onclick="toggleMenu()">
+            ☰ <!-- Icône Hamburger -->
+        </button>
+
+        <ul id="nav-links">
+            <li><a href="#accueil" onclick="closeMenu()">Accueil</a></li>
+            <li><a href="#programme" onclick="closeMenu()">Programme</a></li>
+            <li><a href="#avantages" onclick="closeMenu()">Avantages</a></li>
+            <li><a href="#dates-lieux" onclick="closeMenu()">Dates & Lieux</a></li>
+            <li><a href="#inscription" onclick="closeMenu()">Inscription Quad</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
         </ul>
     </div>
 </nav>
@@ -175,7 +289,6 @@
     </div>
 </section>
 
-
 <section id="inscription">
     <div class="container">
         <h2>Inscription Quad</h2>
@@ -220,6 +333,28 @@
 </footer>
 
 <script>
+// --- FONCTIONNALITÉS DU MENU MOBILE ---
+
+const navLinks = document.getElementById('nav-links');
+const menuToggle = document.getElementById('menu-toggle');
+
+function toggleMenu() {
+    const isExpanded = navLinks.classList.toggle('nav-open');
+    menuToggle.setAttribute('aria-expanded', isExpanded);
+    menuToggle.innerHTML = isExpanded ? '✕' : '☰'; // Changer l'icône
+}
+
+function closeMenu() {
+    // Ferme le menu après un clic de lien sur mobile (pour l'accessibilité)
+    if (window.innerWidth <= 768) {
+        navLinks.classList.remove('nav-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.innerHTML = '☰';
+    }
+}
+
+// --- AUTRES FONCTIONNALITÉS (Compteur et Formulaire) ---
+
 // Compteur
 function updateCountdown(){
     const target = new Date('2025-12-05T08:00:00').getTime();
@@ -234,7 +369,7 @@ function updateCountdown(){
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// Formulaire Quad sécurisé
+// Formulaire Quad sécurisé (Utilisation de localStorage pour la démo)
 const form = document.getElementById('quad-form');
 form.addEventListener('submit', function(e){
     e.preventDefault();
@@ -242,21 +377,37 @@ form.addEventListener('submit', function(e){
     const nom = document.getElementById('nom').value.trim();
     const contact = document.getElementById('contact').value.trim();
     const email = document.getElementById('email').value.trim();
+    
     if(prenom && nom && contact && email){
+        // Utilisation d'un élément modal simple à la place d'alert()
+        const message = document.createElement('div');
+        message.textContent = 'Merci pour votre inscription ! La direction validera votre place.';
+        message.style.cssText = "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #008000; color: white; padding: 20px; border-radius: 8px; z-index: 10000; box-shadow: 0 0 20px rgba(0,0,0,0.5);";
+        document.body.appendChild(message);
+        setTimeout(() => document.body.removeChild(message), 3000); // Disparaît après 3 secondes
+
         let inscriptions = JSON.parse(localStorage.getItem('inscriptions')) || [];
         inscriptions.push({prenom, nom, contact, email});
         localStorage.setItem('inscriptions', JSON.stringify(inscriptions));
-        alert('Merci pour votre inscription ! La direction validera votre place.');
         form.reset();
     } else {
-        alert('Veuillez remplir tous les champs.');
+        const message = document.createElement('div');
+        message.textContent = 'Veuillez remplir tous les champs.';
+        message.style.cssText = "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #ff4444; color: white; padding: 20px; border-radius: 8px; z-index: 10000; box-shadow: 0 0 20px rgba(0,0,0,0.5);";
+        document.body.appendChild(message);
+        setTimeout(() => document.body.removeChild(message), 3000); // Disparaît après 3 secondes
     }
 });
 
 function showInscriptions(){
     const password = prompt("Entrez le mot de passe de la direction :");
     if(password !== "SUPMTIDIR2025"){
-        alert("Mot de passe incorrect !");
+        // Utilisation d'un élément modal simple à la place d'alert()
+        const message = document.createElement('div');
+        message.textContent = "Mot de passe incorrect !";
+        message.style.cssText = "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #ff4444; color: white; padding: 20px; border-radius: 8px; z-index: 10000; box-shadow: 0 0 20px rgba(0,0,0,0.5);";
+        document.body.appendChild(message);
+        setTimeout(() => document.body.removeChild(message), 3000);
         return;
     }
     const listContainer = document.getElementById('inscriptions-list');
@@ -275,15 +426,13 @@ function showInscriptions(){
 </script>
 <footer style="background:#0056b3; color:white; text-align:center; padding:20px; font-size:15px; margin-top:30px;">
     Développement web réalisé par 
-    <a href="https://www.linkedin.com/in/youssef-lachhab-?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" 
-       style="color:#ffd700; text-decoration:none; font-weight:600;">
+    <a href="https://www.linkedin.com/in/youssef-lachhab-?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"
+        style="color:#ffd700; text-decoration:none; font-weight:600;">
        Youssef Lachhab
     </a>
 </footer>
-
 </body>
 </html>
-
 
 
 
