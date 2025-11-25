@@ -69,11 +69,14 @@
     footer { background:#0056b3; color:white; text-align:center; padding:25px; border-radius:12px; }
 
     @media(max-width:768px){
-        nav ul { flex-direction:column; align-items:center; }
-        nav li { margin:5px 0; }
-        .activities, .advantages, .contact { grid-template-columns:1fr; }
-        header h1 { font-size:2em; }
+    header {
+        padding: 30px 15px;       /* moins de padding pour le header */
     }
+    header h1 {
+        font-size: 1.8em;         /* texte plus petit pour s’adapter */
+    }
+    header p {
+
 </style>
 </head>
 <body>
@@ -280,6 +283,7 @@ function showInscriptions(){
 
 </body>
 </html>
+
 
 
 
