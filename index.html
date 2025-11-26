@@ -1,3 +1,4 @@
+<!-- Site développé par Youssef Lachhab -->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,12 +8,12 @@
 <meta name="description" content="Découvrez les Journées d’Intégration SUPMTI Béni Mellal 2025 : programme, dates, avantages et inscription pour une expérience inoubliable.">
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-    /* STYLE ORIGINAL (DEMANDÉ PAR L'UTILISATEUR) */
+    /* Reset et styles globaux */
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family: 'Roboto', sans-serif; line-height:1.6; background:#f4f7fa; color:#333; scroll-behavior: smooth; }
     .container { max-width:1200px; margin:0 auto; padding:0 20px; }
 
-    /* En-tête avec Dégradé Bleu */
+    /* Header */
     header { text-align:center; padding:60px 20px; background:linear-gradient(135deg, #0056b3, #00aaff); color:white; }
     header .logo { width:120px; margin-bottom:20px; border-radius:50%; border:2px solid white; }
     header h1 { font-size:2.8em; margin-bottom:10px; }
@@ -21,12 +22,34 @@
 
     /* Navigation */
     nav { position:sticky; top:0; background:#0056b3; z-index:100; box-shadow:0 2px 5px rgba(0,0,0,0.2); }
-    nav ul { list-style:none; display:flex; justify-content:center; flex-wrap:wrap; }
+    nav .container {
+        display: flex;
+        justify-content: center; /* Centré par défaut sur desktop */
+        align-items: center;
+    }
+    nav ul { 
+        list-style:none; 
+        display:flex; 
+        justify-content:center; 
+        flex-wrap:wrap; 
+        transition: height 0.3s ease-in-out;
+    }
     nav li { margin:0 15px; }
     nav a { color:white; font-weight:bold; padding:15px 10px; display:inline-block; text-decoration:none; transition:0.3s; }
     nav a:hover { background:#003d82; border-radius:4px; }
+    
+    /* Bouton Menu (caché par défaut sur desktop) */
+    .menu-toggle {
+        display: none;
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        padding: 10px 15px;
+        cursor: pointer;
+    }
 
-    /* Sections avec grands arrondis et ombres */
+    /* Sections */
     section { padding:60px 20px; background:white; margin:20px 0; border-radius:12px; box-shadow:0 5px 15px rgba(0,0,0,0.05); }
     section h2 { color:#0056b3; margin-bottom:30px; text-align:center; font-size:2em; }
 
@@ -36,105 +59,131 @@
     .activity:hover { transform: translateY(-5px); }
     .activity img { width:100%; height:180px; object-fit:cover; border-radius:12px; margin-bottom:15px; }
     .activity h3 { margin-bottom:10px; color:#0056b3; }
-    .activity .icon { font-size: 3em; margin-bottom: 10px; color:#0056b3; } /* Pour garder le style de l'icône de votre code */
 
     /* Avantages */
     .advantages { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:25px; }
     .advantage { background:#e6f0ff; padding:20px; border-radius:12px; text-align:center; border-left:5px solid #0056b3; transition: transform 0.3s; }
     .advantage:hover { transform: translateY(-5px); }
-    
+
     /* Dates & Lieux */
-    .dates-lieux { background: #e9f4ff; padding: 20px; border-radius: 12px; }
-    .dates-lieux ul { list-style: none; text-align:center; padding:0; margin-bottom:20px; }
+    .dates-lieux ul { list-style:none; text-align:center; padding:0; margin-bottom:20px; }
     .dates-lieux li { font-weight:bold; margin-bottom:10px; font-size:1.1em; }
     .map iframe { width:100%; height:350px; border:none; border-radius:12px; }
 
-    /* Inscription (Formulaire Local) */
-    .inscription { 
-        background: #f0f8ff; 
-        padding: 30px; 
-        border-radius: 12px; 
-        border: 1px solid #0056b3;
-    }
-    .inscription label { display: block; margin-top: 10px; font-weight: bold; color: #0056b3; }
-    .inscription input { 
-        width: 100%; 
-        padding: 12px; 
-        margin-bottom: 15px; 
-        border: 1px solid #ccc; 
-        border-radius: 8px; 
-    }
-    .inscription button { 
-        background: #00aaff; 
-        color: white; 
-        border: none; 
-        padding: 12px 25px; 
-        border-radius: 8px; 
-        cursor: pointer; 
-        transition: background 0.3s;
-        margin-top: 10px;
-        font-weight: bold;
-    }
-    .inscription button:hover { background: #0056b3; }
+    /* Formulaire */
+    .inscription form { display:flex; flex-direction:column; max-width:400px; margin:0 auto; }
+    .inscription input, .inscription button { margin-bottom:15px; padding:12px; border:1px solid #ccc; border-radius:6px; font-size:1em; }
+    .inscription button { background:#0056b3; color:white; font-weight:bold; cursor:pointer; transition:0.3s; }
+    .inscription button:hover { background:#003d82; }
+    .inscriptions-list { margin-top:20px; display:none; max-width:600px; margin-left:auto; margin-right:auto; }
+    .inscriptions-list li { background:#f9f9f9; padding:12px; margin-bottom:6px; border-radius:6px; }
 
-    .inscriptions-list { 
-        margin-top: 30px; 
-        padding: 20px; 
-        background: #f9f9f9; 
-        border-radius: 8px; 
-        box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
-    }
-    .inscriptions-list h3 { 
-        text-align: center; 
-        color: #003d82; 
-        margin-bottom: 15px; 
-    }
-    .inscriptions-list ul { list-style: none; padding: 0; }
-    .inscriptions-list li { 
-        background: white; 
-        padding: 10px; 
-        margin-bottom: 8px; 
-        border-radius: 6px; 
-        border-left: 3px solid #00aaff;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-
-    /* Contact & Footer */
+    /* Contact */
     .contact { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
-    .social, .whatsapp { text-align: center; } 
+    .social, .whatsapp { text-align: center; } 
     .social a, .whatsapp a { display:inline-block; margin:10px 5px; padding:12px 20px; border-radius:8px; color:white; font-weight:bold; text-decoration:none; transition:0.3s; }
     .social a { background:#0056b3; }
     .social a:hover { background:#003d82; }
     .whatsapp a { background:#25d366; }
     .whatsapp a:hover { background:#128c7e; }
 
-    /* Footer Complet */
-    footer { 
-        background:#003d82; 
-        color:white; 
-        text-align:center; 
-        padding:25px; 
-        margin-top:20px;
-        border-radius:0 0 12px 12px;
-    }
-    footer a { 
-        color:#ffd700; 
-        text-decoration:none; 
-        font-weight:600; 
-    }
-    footer p {
-        margin: 5px 0;
-    }
+    /* Footer */
+    footer { background:#0056b3; color:white; text-align:center; padding:25px; border-radius:12px; }
 
-    /* Responsive Design */
+    /* === RESPONSIVE DESIGN (Max 768px pour Tablettes et Mobiles) === */
     @media(max-width:768px) {
-        header h1 { font-size: 2em; }
-        header p { font-size: 1em; }
-        nav ul { flex-direction: column; align-items: center; }
-        nav li { margin: 5px 0; width: 100%; text-align: center; }
-        nav a { display: block; }
-        .activities, .advantages, .contact { grid-template-columns: 1fr; gap: 15px; }
-        section { padding: 40px 15px; margin: 15px 0; }
+        /* Conteneur et Sections */
+        .container {
+            padding: 0 10px;
+        }
+        section {
+            padding: 40px 15px;
+            margin: 15px 0;
+        }
+
+        /* Header */
+        header {
+            padding: 40px 15px;
+        }
+        header h1 {
+            font-size: 2em;
+        }
+        header p {
+            font-size: 1em;
+        }
+        .countdown {
+            font-size: 1.1em;
+            padding: 8px 15px;
+        }
+
+        /* Titres de Sections */
+        section h2 {
+            font-size: 1.6em;
+            margin-bottom: 20px;
+        }
+
+        /* NAVIGATION MOBILE */
+        nav .container {
+            justify-content: flex-start; /* Aligner le bouton menu à gauche */
+        }
+        .menu-toggle {
+            display: block; /* Afficher le bouton menu */
+            order: 1; /* Le mettre en premier si on veut */
+        }
+        nav ul {
+            display: none; /* Cacher le menu par défaut */
+            flex-direction: column; 
+            align-items: flex-start; /* Aligner les liens à gauche */
+            width: 100%;
+            padding-top: 5px; 
+            order: 2; 
+        }
+    
+        nav ul.nav-open {
+            display: flex;
+        }
+        nav li {
+            margin: 0;
+            width: 100%; 
+        }
+        nav a {
+            padding: 10px 15px;
+            width: 100%;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        nav li:last-child a {
+            border-bottom: none;
+        }
+
+
+        .activities, .advantages {
+            gap: 15px;
+        }
+
+       
+        .contact {
+            grid-template-columns: 1fr;
+            gap: 30px;
+            text-align: center;
+        }
+        .social a, .whatsapp a {
+            margin: 8px;
+            display: block; 
+            width: 80%; 
+            max-width: 300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .gallery {
+            grid-template-columns: 1fr;
+        }
+
+     
+        footer {
+            padding: 20px 10px;
+        }
     }
 </style>
 </head>
@@ -143,20 +192,25 @@
     <div class="container">
         <img src="https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/sup%20mti.jpg" alt="Logo SUPMTI" class="logo">
         <h1>🎉 Journées d’Intégration SUPMTI 2025 🎉</h1>
-        <p>Bienvenue aux Journées d’Intégration SUPMTI Béni Mellal 2025 ! Ces deux journées exceptionnelles, les 5 et 6 décembre, sont conçues pour vous permettre de découvrir notre campus, de tisser des liens solides avec vos pairs et de vivre des moments de joie et de partage inoubliables.</p>
+        <p>Bienvenue aux Journées d’Intégration SUPMTI Béni Mellal 2025 ! Vivez des moments de joie et partage inoubliables.</p>
         <div class="countdown" id="countdown" aria-live="polite"></div>
     </div>
 </header>
 
 <nav>
     <div class="container">
-        <ul>
-            <li><a href="#accueil">Accueil</a></li>
-            <li><a href="#programme">Programme</a></li>
-            <li><a href="#avantages">Avantages</a></li>
-            <li><a href="#dates-lieux">Dates & Lieux</a></li>
-            <li><a href="#inscription">Inscription Quad</a></li>
-            <li><a href="#contact">Contact</a></li>
+        
+        <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav-links" onclick="toggleMenu()">
+            ☰ 
+        </button>
+
+        <ul id="nav-links">
+            <li><a href="#accueil" onclick="closeMenu()">Accueil</a></li>
+            <li><a href="#programme" onclick="closeMenu()">Programme</a></li>
+            <li><a href="#avantages" onclick="closeMenu()">Avantages</a></li>
+            <li><a href="#dates-lieux" onclick="closeMenu()">Dates & Lieux</a></li>
+            <li><a href="#inscription" onclick="closeMenu()">Inscription Quad</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
         </ul>
     </div>
 </nav>
@@ -166,46 +220,29 @@
         <h2>Programme des activités</h2>
         <div class="activities">
             <div class="activity">
-                <img src="https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/Jeux%20d%E2%80%99%C3%A9quipe.jpg" alt="Jeux d’équipe">
-                <div class="icon" aria-hidden="true">🤝</div>
+                <img src="https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/Jeux%20d%E2%80%99%C3%A9quipe.jpg" alt="Jeux d'équipe">
                 <h3>Jeux d’équipe</h3>
                 <p>Renforcez la coopération et les liens entre étudiants.</p>
             </div>
             <div class="activity">
                 <img src="https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/talentshow.jpg" alt="Talent Show">
-                <div class="icon" aria-hidden="true">🎤</div>
                 <h3>Talent Show</h3>
                 <p>Exprimez vos talents et laissez-vous surprendre par ceux de vos camarades.</p>
             </div>
             <div class="activity">
                 <img src="https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/tournoi-football-ballon.jpg" alt="Tournois sportifs">
-                <div class="icon" aria-hidden="true">⚽</div>
                 <h3>Tournois sportifs</h3>
                 <p>Vivez des moments de compétition dans une ambiance chaleureuse.</p>
             </div>
             <div class="activity">
                 <img src="https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/beni-mellal.jpg" alt="Visite guidée">
-                <div class="icon" aria-hidden="true">🏛️</div>
                 <h3>Visite guidée</h3>
                 <p>Découvrez les lieux emblématiques de Béni Mellal et explorez le campus.</p>
             </div>
-             <div class="activity">
-                <img src="https://via.placeholder.com/300x150?text=Animations+interactives" alt="Animations interactives">
-                <div class="icon" aria-hidden="true">🎨</div>
-                <h3>Animations interactives</h3>
-                <p>Participez à des activités ludiques et créatives.</p>
-            </div>
             <div class="activity">
                 <img src="https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/quad.jpg" alt="Parcours Quad">
-                <div class="icon" aria-hidden="true">🏍️</div>
                 <h3>Parcours Quad</h3>
                 <p>Expérience originale et divertissante (100 DHS).</p>
-            </div>
-            <div class="activity">
-                <img src="https://via.placeholder.com/300x150?text=Soir%C3%A9e+cin%C3%A9ma" alt="Soirée cinéma">
-                <div class="icon" aria-hidden="true">🎥</div>
-                <h3>Soirée cinéma</h3>
-                <p>Moment de détente et de convivialité.</p>
             </div>
         </div>
     </div>
@@ -217,19 +254,19 @@
         <div class="advantages">
             <div class="advantage">
                 <h3>Renforcez vos liens</h3>
-                <p>Créez des amitiés durables avec vos futurs camarades dans une ambiance conviviale.</p>
+                <p>Créez des amitiés durables avec vos futurs camarades.</p>
             </div>
             <div class="advantage">
                 <h3>Découvrez le campus</h3>
-                <p>Explorez SUPMTI et Béni Mellal pour mieux vous intégrer à votre nouvel environnement.</p>
+                <p>Explorez SUPMTI et Béni Mellal pour mieux vous intégrer.</p>
             </div>
             <div class="advantage">
                 <h3>Vivez des moments uniques</h3>
-                <p>Participez à des activités exclusives comme le parcours quad et le talent show.</p>
+                <p>Participez à des activités exclusives et divertissantes.</p>
             </div>
             <div class="advantage">
                 <h3>Développez vos compétences</h3>
-                <p>Améliorez votre esprit d'équipe, votre créativité et votre confiance en vous.</p>
+                <p>Améliorez votre esprit d'équipe, créativité et confiance.</p>
             </div>
         </div>
     </div>
@@ -238,16 +275,14 @@
 <section id="dates-lieux">
     <div class="container">
         <h2>Dates & Lieux</h2>
-        <div class="dates-lieux">
-            <ul>
-                <li>**5 décembre 2025** : Journée sportive au Club Omnisports de Béni Mellal</li>
-                <li>**6 décembre 2025** : Journée d’intégration à la Maison de la Culture</li>
-            </ul>
-            <p>**N.B :** Parcours Quad – **100 DHS**. Places limitées !</p>
-        </div>
-        <div class="map">
-            <h3>Localisation</h3>
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3324.123456789012!2d-5.123456!3d32.123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzLCsDA3JzI0LjQiTiA1wrAwNycxOC4yIlc!5e0!3m2!1sfr!2sma!4v1234567890123!5m2!1sfr!2sma" allowfullscreen="" loading="lazy" aria-label="Carte des lieux de l'événement"></iframe>
+        <ul>
+            <li>5 décembre 2025 : Journée sportive au Club Omnisports de Béni Mellal</li>
+            <li>6 décembre 2025 : Journée d’intégration à la Maison de la Culture</li>
+        </ul>
+        <p>N.B : Parcours Quad – 100 DHS. Places limitées !</p>
+        <div class="gallery" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:20px; margin-top:20px;">
+            <img src="https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/bm1.jpg" alt="Béni Mellal 1" style="width:100%; border-radius:12px; object-fit:cover;">
+            <img src="https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/bm2.jpg" alt="Béni Mellal 2" style="width:100%; border-radius:12px; object-fit:cover;">
         </div>
     </div>
 </section>
@@ -257,19 +292,14 @@
         <h2>Inscription Quad</h2>
         <div class="inscription">
             <form id="quad-form">
-                <label for="prenom">Prénom</label>
-                <input type="text" id="prenom" required>
-                <label for="nom">Nom</label>
-                <input type="text" id="nom" required>
-                <label for="contact">Contact (Téléphone)</label>
-                <input type="tel" id="contact" required>
-                <label for="email">Email</label>
-                <input type="email" id="email" required>
-                <button type="submit">S'inscrire au Quad</button>
+                <input type="text" id="prenom" placeholder="Prénom" required>
+                <input type="text" id="nom" placeholder="Nom" required>
+                <input type="tel" id="contact" placeholder="Téléphone" required>
+                <input type="email" id="email" placeholder="Email" required>
+                <button type="submit">S'inscrire</button>
             </form>
-            <button onclick="showInscriptions()">Voir la liste des inscriptions (Pour la direction)</button>
-            <div class="inscriptions-list" id="inscriptions-list" style="display:none;">
-                <h3>Liste des inscriptions</h3>
+            <button onclick="showInscriptions()">Voir la liste des inscriptions (Direction)</button>
+            <div class="inscriptions-list" id="inscriptions-list">
                 <ul id="inscriptions-ul"></ul>
             </div>
         </div>
@@ -288,7 +318,7 @@
             </div>
             <div class="whatsapp">
                 <h3>Contactez-nous</h3>
-                <a href="https://wa.me/212669979885?text=Bonjour,%20je%20souhaite%20plus%20d'informations%20sur%20les%20Journées%20d’Intégration%20SUPMTI%202025." target="_blank">WhatsApp</a>
+                <a href="https://wa.me/212669979885?text=Bonjour" target="_blank">WhatsApp</a>
             </div>
         </div>
     </div>
@@ -296,148 +326,107 @@
 
 <footer>
     <div class="container">
-        <p>© 2025 SUPMTI Béni Mellal. Tous droits réservés.</p>
-        <p>Développement web réalisé par 
-            <a href="https://www.linkedin.com/in/youssef-lachhab-?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank">
-                Youssef Lachhab
-            </a>
-        </p>
+        <p>&copy; 2025 SUPMTI Béni Mellal. Tous droits réservés.</p>
     </div>
 </footer>
 
 <script>
-    // URL des images ajoutées pour le programme (si elles existent réellement)
-    document.querySelector('header .logo').src = "https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/sup%20mti.jpg";
-    document.querySelector('.activities .activity:nth-child(1) img').src = "https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/Jeux%20d%E2%80%99%C3%A9quipe.jpg";
-    document.querySelector('.activities .activity:nth-child(2) img').src = "https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/talentshow.jpg";
-    document.querySelector('.activities .activity:nth-child(3) img').src = "https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/tournoi-football-ballon.jpg";
-    document.querySelector('.activities .activity:nth-child(4) img').src = "https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/beni-mellal.jpg";
-    document.querySelector('.activities .activity:nth-child(6) img').src = "https://raw.githubusercontent.com/youssef-IA-dev/journee-integration-sup-mti/main/quad.jpg";
 
 
-    // Compteur
-    function updateCountdown() {
-        const target = new Date('2025-12-05T08:00:00').getTime();
-        const now = new Date().getTime();
-        const distance = target - now;
-        
-        const countdownElement = document.getElementById('countdown');
+const navLinks = document.getElementById('nav-links');
+const menuToggle = document.getElementById('menu-toggle');
 
-        if (distance < 0) {
-            countdownElement.innerHTML = "L'événement est en cours !";
-            return;
-        }
+function toggleMenu() {
+    const isExpanded = navLinks.classList.toggle('nav-open');
+    menuToggle.setAttribute('aria-expanded', isExpanded);
+    menuToggle.innerHTML = isExpanded ? '✕' : '☰'; 
+}
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        
-        countdownElement.innerHTML = `${days} jours, ${hours}h ${minutes}min ${seconds}sec`;
+function closeMenu() {
+  
+    if (window.innerWidth <= 768) {
+        navLinks.classList.remove('nav-open');
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menuToggle.innerHTML = '☰';
     }
-
-    // Initialisation du compte à rebours
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
+}
 
 
-    // === Gestion du formulaire d'inscription Quad (Utilisation du Local Storage) ===
+function updateCountdown(){
+    const target = new Date('2025-12-05T08:00:00').getTime();
+    const now = new Date().getTime();
+    const distance = target - now;
+    const days = Math.floor(distance/(1000*60*60*24));
+    const hours = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+    const minutes = Math.floor((distance%(1000*60*60))/(1000*60));
+    const seconds = Math.floor((distance%(1000*60))/1000);
+    document.getElementById('countdown').innerHTML = `${days} jours, ${hours}h ${minutes}min ${seconds}sec`;
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+const form = document.getElementById('quad-form');
+form.addEventListener('submit', function(e){
+    e.preventDefault();
+    const prenom = document.getElementById('prenom').value.trim();
+    const nom = document.getElementById('nom').value.trim();
+    const contact = document.getElementById('contact').value.trim();
+    const email = document.getElementById('email').value.trim();
+    
+    if(prenom && nom && contact && email){
+      
+        const message = document.createElement('div');
+        message.textContent = 'Merci pour votre inscription ! La direction validera votre place.';
+        message.style.cssText = "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #008000; color: white; padding: 20px; border-radius: 8px; z-index: 10000; box-shadow: 0 0 20px rgba(0,0,0,0.5);";
+        document.body.appendChild(message);
+        setTimeout(() => document.body.removeChild(message), 3000); 
 
-    const form = document.getElementById('quad-form');
-    const inscriptionsListDiv = document.getElementById('inscriptions-list');
-    const inscriptionsUl = document.getElementById('inscriptions-ul');
-
-    // Charge les inscriptions stockées ou initialise un tableau vide
-    function loadInscriptions() {
-        const inscriptions = localStorage.getItem('quadInscriptions');
-        return inscriptions ? JSON.parse(inscriptions) : [];
+        let inscriptions = JSON.parse(localStorage.getItem('inscriptions')) || [];
+        inscriptions.push({prenom, nom, contact, email});
+        localStorage.setItem('inscriptions', JSON.stringify(inscriptions));
+        form.reset();
+    } else {
+        const message = document.createElement('div');
+        message.textContent = 'Veuillez remplir tous les champs.';
+        message.style.cssText = "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #ff4444; color: white; padding: 20px; border-radius: 8px; z-index: 10000; box-shadow: 0 0 20px rgba(0,0,0,0.5);";
+        document.body.appendChild(message);
+        setTimeout(() => document.body.removeChild(message), 3000); 
     }
+});
 
-    // Sauvegarde les inscriptions
-    function saveInscriptions(inscriptions) {
-        localStorage.setItem('quadInscriptions', JSON.stringify(inscriptions));
+function showInscriptions(){
+    const password = prompt("Entrez le mot de passe de la direction :");
+    if(password !== "SUPMTIDIR2025"){
+  
+        const message = document.createElement('div');
+        message.textContent = "Mot de passe incorrect !";
+        message.style.cssText = "position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #ff4444; color: white; padding: 20px; border-radius: 8px; z-index: 10000; box-shadow: 0 0 20px rgba(0,0,0,0.5);";
+        document.body.appendChild(message);
+        setTimeout(() => document.body.removeChild(message), 3000);
+        return;
     }
-
-    // Ajout d'une nouvelle inscription
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const prenom = document.getElementById('prenom').value.trim();
-        const nom = document.getElementById('nom').value.trim();
-        const contact = document.getElementById('contact').value.trim();
-        const email = document.getElementById('email').value.trim();
-
-        if (prenom && nom && contact && email) {
-            const newInscription = { prenom, nom, contact, email, date: new Date().toLocaleString('fr-FR') };
-            const inscriptions = loadInscriptions();
-            
-            // Vérification de l'unicité par Nom + Prénom + Contact
-            const isDuplicate = inscriptions.some(
-                insc => insc.nom === nom && insc.prenom === prenom && insc.contact === contact
-            );
-
-            if (isDuplicate) {
-                alert("Vous êtes déjà inscrit pour le Quad.");
-                return;
-            }
-
-            inscriptions.push(newInscription);
-            saveInscriptions(inscriptions);
-
-            alert(`Inscription Quad de ${prenom} ${nom} enregistrée avec succès ! (100 DHS à payer sur place)`);
-            form.reset(); // Réinitialiser le formulaire après succès
-            
-            // Recharger la liste si elle est affichée
-            if (inscriptionsListDiv.style.display !== 'none') {
-                displayInscriptions(inscriptions);
-            }
-        } else {
-            alert("Veuillez remplir tous les champs du formulaire.");
-        }
-    });
-
-    // Affiche les inscriptions dans la liste
-    function displayInscriptions(inscriptions) {
-        inscriptionsUl.innerHTML = ''; // Nettoyer la liste
-        if (inscriptions.length === 0) {
-            inscriptionsUl.innerHTML = '<li>Aucune inscription enregistrée.</li>';
-            return;
-        }
-
-        inscriptions.forEach((insc, index) => {
-            const li = document.createElement('li');
-            li.innerHTML = `**${index + 1}. ${insc.prenom} ${insc.nom}** | Contact: ${insc.contact} | Email: ${insc.email} | Date: ${insc.date}`;
-            inscriptionsUl.appendChild(li);
+    const listContainer = document.getElementById('inscriptions-list');
+    const ul = document.getElementById('inscriptions-ul');
+    ul.innerHTML = '';
+    const inscriptions = JSON.parse(localStorage.getItem('inscriptions')) || [];
+    if(inscriptions.length === 0){
+        ul.innerHTML = '<li>Aucune inscription pour le moment.</li>';
+    } else {
+        inscriptions.forEach((insc,index)=>{
+            ul.innerHTML += `<li>${index+1}. ${insc.prenom} ${insc.nom} - ${insc.contact} - ${insc.email}</li>`;
         });
     }
-
-    // Fonction pour afficher/masquer la liste des inscriptions
-    function showInscriptions() {
-        if (inscriptionsListDiv.style.display === 'none') {
-            const password = prompt("Veuillez entrer le mot de passe de la direction pour accéder à la liste :");
-            // Mot de passe simple (à des fins de démonstration, NE PAS utiliser en production)
-            if (password === 'SUPMTI2025') { 
-                displayInscriptions(loadInscriptions());
-                inscriptionsListDiv.style.display = 'block';
-                alert(`Total des inscrits : ${loadInscriptions().length}`);
-            } else {
-                alert("Mot de passe incorrect.");
-            }
-        } else {
-            inscriptionsListDiv.style.display = 'none';
-        }
-    }
-
-    // Rendre la fonction accessible globalement pour le bouton HTML
-    window.showInscriptions = showInscriptions;
-
-    // Masquer la liste au chargement
-    inscriptionsListDiv.style.display = 'none';
+    listContainer.style.display='block';
+}
 </script>
+<footer style="background:#0056b3; color:white; text-align:center; padding:20px; font-size:15px; margin-top:30px;">
+    Développement web réalisé par 
+    <a href="https://www.linkedin.com/in/youssef-lachhab-?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"
+        style="color:#ffd700; text-decoration:none; font-weight:600;">
+       Youssef Lachhab
+    </a>
+</footer>
 </body>
 </html>
-
-
 
 
 
